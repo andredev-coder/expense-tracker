@@ -1,1 +1,1 @@
-from .transaction import TransactionRepository
+from .transaction_repository import TransactionRepository

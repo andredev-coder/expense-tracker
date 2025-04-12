@@ -1,9 +1,5 @@
-from typing import List
-
 from core.repositories import TransactionRepository
-from core.models import Transaction, Expense, Income
-from core.models.transactions import TransactionType
-from core.models.transactions import Transactions
+from core.models import Transaction, Transactions, TransactionType
 
 
 class TransactionService:

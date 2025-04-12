@@ -1,30 +1,32 @@
 import orjson
+from typing import List, Dict
+from .storage import Storage
 
 
-class Storage:
+class JSONFileStorage(Storage):
     def __init__(self, filename: str = '.transactions.json'):
         self.file = open(filename, 'r+', encoding='utf-8')
         self.main_key = 'transactions'
 
-    def read(self) -> str:
+    def load(self) -> List[Dict]:
         self.file.seek(0)
-        return self.file.read()
-
-    def insert(self, *i: dict) -> None:
+        return orjson.loads(self.file.read())[self.main_key]
+    
+    def save(self, *i: Dict) -> None:
         data = {self.main_key: list(i)}
         
         self.clear()
         self.file.write(orjson.dumps(data, option=orjson.OPT_INDENT_2).decode('utf-8'))
-        self.save()
+        
+        self.flush()
 
-    def clear(self):
+    def clear(self) -> None:
         self.file.seek(0)
         self.file.truncate()
 
-    def save(self):
+    def flush(self) -> None:
         self.file.seek(0)
         self.file.flush()
 
-    def close(self):
+    def close(self) -> None:
         self.file.close()
-

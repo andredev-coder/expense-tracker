@@ -1,2 +1,1 @@
-from .storage import Storage
-from .transactions import Transaction, Transactions, Expense, Income
+from .transaction import Transaction, Transactions, TransactionType

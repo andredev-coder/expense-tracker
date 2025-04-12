@@ -2,8 +2,7 @@
 
 from core.services import TransactionService
 from core.views import ApplicationView
-from core.models import Storage, Transaction
-from core.models.transactions import TransactionType
+from core.models import Transaction, TransactionType
 import random
 
 from flet import (  # type: ignore

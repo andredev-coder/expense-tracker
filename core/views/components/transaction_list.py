@@ -47,7 +47,7 @@ from flet import (  # type: ignore
 from flet import Colors as ColorName
 from flet import Icons as IconName 
 from typing import Callable
-from core.models.transactions import TransactionType
+from core.models import TransactionType
 
 
 
