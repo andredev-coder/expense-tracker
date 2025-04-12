@@ -93,7 +93,6 @@ class TransactionList(Container):
             self.list.update()
 
     def add_transaction_card(self, id, type: TransactionType, subtitle, date, amount):
-        print(type)
         if type == TransactionType.INCOME:
             icon = IconName.ATTACH_MONEY
             icon_color = ColorName.LIGHT_GREEN_ACCENT

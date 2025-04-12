@@ -1,8 +1,6 @@
-
-
 from core.services import TransactionService
 from core.views import ApplicationView
-from core.models import Transaction, TransactionType
+from core.models import Transaction, Transactions, TransactionType
 import random
 
 from flet import (  # type: ignore
@@ -17,10 +15,22 @@ class FinancialController:
 
         self.view.transaction_form.callback = self.add_transaction
         self.view.transaction_list.on_transaction_card_dismiss = self.remove_transaction
+
+        self.refresh_cards()
+        self.refresh_transaction_list()
+        
+
+    def run(self):
+        pass
+
+    def refresh_cards(self):
         self.view.expense_card.set_amount(self.calculate_cards())
         self.view.income_card.set_amount(self.calculate_cards(True))
 
-        transactions = self.transaction_service.get_all()
+    def refresh_transaction_list(self, transactions: Transactions | None = None):
+        if not transactions:
+            transactions = self.transaction_service.get_all()
+
         for transaction in transactions:
             self.view.transaction_list.add_transaction_card(
                 transaction.id,
@@ -30,10 +40,6 @@ class FinancialController:
                 transaction.amount
             )
 
-
-
-    def run(self):
-        pass
 
     def add_transaction(self, amount: float, description: str):
         if amount < 0:
@@ -45,27 +51,18 @@ class FinancialController:
             id=str(random.randint(1000, 9999)),
             type=transaction_type,
             amount=amount,
-            category=description,
             description=description
         )
         self.transaction_service.add(transaction)
 
-        self.view.expense_card.set_amount(self.calculate_cards())
-        self.view.income_card.set_amount(self.calculate_cards(True))
-        self.view.transaction_list.add_transaction_card(
-            transaction.id,
-            transaction.type,
-            transaction.description,
-            transaction.date,
-            transaction.amount
-        )
+        self.refresh_cards()
+        self.refresh_transaction_list(Transactions([transaction]))
+
 
     def remove_transaction(self, transaction_id: str):
         self.transaction_service.delete(transaction_id)
         
-        self.view.expense_card.set_amount(self.calculate_cards())
-        self.view.income_card.set_amount(self.calculate_cards(True))
-
+        self.refresh_cards()
 
 
     def calculate_cards(self, is_income: bool = False) -> float:
