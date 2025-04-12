@@ -9,6 +9,8 @@ from flet import ( # type: ignore
     ScrollbarTheme,
     Theme,
     Row,
+    Text, 
+    FontWeight, 
     VerticalDivider,
     padding
 ) 
@@ -16,6 +18,10 @@ from .components import SummaryCard, TransactionForm, TransactionList
 
 from flet import Colors as ColorName
 from flet import Icons as IconName 
+
+
+
+
 
 
 
@@ -44,10 +50,30 @@ class ApplicationView():
         }
         page.theme = Theme(font_family="Overpass", scrollbar_theme=ScrollbarTheme(thickness=0))
 
+
+        self.balance = Text(
+            value='$0.0', 
+            color=ColorName.with_opacity(0.9, ColorName.BLACK),
+            size=24, 
+            weight=FontWeight.BOLD
+        )
+
         page.add(
             Container(
                 content=Column(
                     controls=[
+                        Column(
+                            controls=[
+                                Text(
+                                    value='Your Balance', 
+                                    color=ColorName.with_opacity(0.9, ColorName.BLACK),
+                                    size=24, 
+                                    weight=FontWeight.BOLD
+                                ),
+                                self.balance
+                            ],
+                            spacing=0
+                        ),
                         Container(
                             content=Row(
                                 controls=[

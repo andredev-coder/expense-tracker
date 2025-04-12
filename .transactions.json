@@ -1,3 +1,25 @@
 {
-  "transactions": []
+  "transactions": [
+    {
+      "id": "7511",
+      "type": "income",
+      "amount": 1.0,
+      "date": "2025-04-12T12:08:06.394686",
+      "description": "1"
+    },
+    {
+      "id": "2170",
+      "type": "income",
+      "amount": 2.0,
+      "date": "2025-04-12T12:08:08.727945",
+      "description": "2"
+    },
+    {
+      "id": "7098",
+      "type": "expense",
+      "amount": -1.0,
+      "date": "2025-04-12T12:08:13.242967",
+      "description": "-1"
+    }
+  ]
 }

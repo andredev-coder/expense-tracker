@@ -88,12 +88,18 @@ class TransactionForm(Container):
         self._content.controls = [
             Column(
                 controls=[
+                    Text(
+                        value='Add Transaction', 
+                        color=ColorName.with_opacity(0.9, ColorName.BLACK),
+                        size=18, 
+                        weight=FontWeight.BOLD
+                    ),
                     Column(
                         controls=[
                             Text(
                                 value='Description', 
                                 color=ColorName.with_opacity(0.9, ColorName.BLACK),
-                                size=16, 
+                                size=14, 
                                 weight=FontWeight.BOLD
                             ),
                             self.description_field
@@ -106,7 +112,7 @@ class TransactionForm(Container):
                                 value='Amount (negative - expense, positive - income)',
                                 color=ColorName.with_opacity(0.9, ColorName.BLACK),
                                 weight=FontWeight.BOLD,
-                                size=16, 
+                                size=14, 
                             ),
                             self.amount_field
                         ],

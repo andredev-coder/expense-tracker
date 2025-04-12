@@ -16,16 +16,19 @@ class FinancialController:
         self.view.transaction_form.callback = self.add_transaction
         self.view.transaction_list.on_transaction_card_dismiss = self.remove_transaction
 
-        self.refresh_cards()
+        self.refresh_numbers()
         self.refresh_transaction_list()
         
 
     def run(self):
         pass
 
-    def refresh_cards(self):
+    def refresh_numbers(self):
+        self.view.balance.value = f'${self.calculate_cards(True) + self.calculate_cards()}'
         self.view.expense_card.set_amount(self.calculate_cards())
         self.view.income_card.set_amount(self.calculate_cards(True))
+
+        self.view.page.update()
 
     def refresh_transaction_list(self, transactions: Transactions | None = None):
         if not transactions:
@@ -55,14 +58,14 @@ class FinancialController:
         )
         self.transaction_service.add(transaction)
 
-        self.refresh_cards()
+        self.refresh_numbers()
         self.refresh_transaction_list(Transactions([transaction]))
 
 
     def remove_transaction(self, transaction_id: str):
         self.transaction_service.delete(transaction_id)
         
-        self.refresh_cards()
+        self.refresh_numbers()
 
 
     def calculate_cards(self, is_income: bool = False) -> float:

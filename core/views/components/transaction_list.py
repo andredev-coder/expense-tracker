@@ -67,7 +67,7 @@ class TransactionList(Container):
 
         self._content = Column(
             controls=[
-                Text('Transactions', size=16, weight=FontWeight.BOLD, color=ColorName.with_opacity(0.9, ColorName.BLACK)),
+                Text('Transactions', size=18, weight=FontWeight.BOLD, color=ColorName.with_opacity(0.9, ColorName.BLACK)),
                 Container(
                     content=self.list,
                     padding=padding.symmetric(vertical=10),
